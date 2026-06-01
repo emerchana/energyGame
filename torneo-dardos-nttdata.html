@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>I Torneo Energy Dardos – NTT DATA Salamanca</title>
+  <style>
+    /* Estilos corporativos inspirados en NTT DATA */
+    :root {
+      --ntt-primary: #0070c0;
+      --ntt-primary-dark: #00508a;
+      --ntt-accent: #00a1e4;
+      --ntt-bg: #f4f7fb;
+      --ntt-surface: #ffffff;
+      --ntt-border: #d0d7e2;
+      --ntt-text: #1f2933;
+      --ntt-muted: #6b7b93;
+      --ntt-danger: #d64545;
+      --ntt-success: #2e8540;
+      --radius-md: 8px;
+      --shadow-md: 0 4px 10px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--ntt-bg);
+      color: var(--ntt-text);
+    }
+
+    .app-container {
+      max-width: 1200px;
+      margin: 24px auto 40px;
+      padding: 0 16px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: var(--ntt-primary-dark);
+    }
+
+    .title-block p {
+      margin: 4px 0 0;
+      color: var(--ntt-muted);
+      font-size: 0.9rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0, 112, 192, 0.08);
+      color: var(--ntt-primary-dark);
+      font-size: 0.8rem;
+      border: 1px solid rgba(0, 112, 192, 0.2);
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--ntt-border);
+      margin-bottom: 16px;
+    }
+
+    .tab {
+      padding: 10px 18px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--ntt-muted);
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .tab.active {
+      color: var(--ntt-primary-dark);
+      border-bottom-color: var(--ntt-primary);
+      background: rgba(0,112,192,0.03);
+    }
+
+    .tab:not(.active):hover {
+      background: rgba(15,23,42,0.02);
+      color: var(--ntt-primary-dark);
+    }
+
+    .tab-content {
+      background: var(--ntt-surface);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 18px 20px 22px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: var(--ntt-primary-dark);
+    }
+
+    h3 {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      color: var(--ntt-primary-dark);
+    }
+
+    p, li {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .info-block {
+      background: #f9fafb;
+      border-radius: 6px;
+      border: 1px solid var(--ntt-border);
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid var(--ntt-border);
+      color: var(--ntt-muted);
+      background: white;
+      margin-right: 4px;
+      margin-bottom: 3px;
+    }
+
+    /* Tabla estilo corporativo */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 20px;
+      font-size: 0.85rem;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+    }
+
+    thead {
+      background: linear-gradient(90deg, #0070c0, #00a1e4);
+      color: white;
+    }
+
+    th, td {
+      padding: 6px 8px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    tbody tr:hover {
+      background: #eef2ff;
+    }
+
+    td input[type="text"],
+    td input[type="number"] {
+      width: 100%;
+      padding: 3px 4px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      border: 1px solid var(--ntt-border);
+      text-align: center;
+    }
+
+    .subsection-title {
+      font-weight: 600;
+      margin: 20px 0 6px;
+      font-size: 0.95rem;
+      color: var(--ntt-primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .subsection-title::before {
+      content: "";
+      width: 4px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--ntt-primary);
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(0,112,192,0.06);
+      color: var(--ntt-primary-dark);
+      font-size: 0.75rem;
+      margin-left: 6px;
+    }
+
+    .footnote {
+      font-size: 0.8rem;
+      color: var(--ntt-muted);
+      margin-top: 4px;
+    }
+
+    .layout-two {
+      display: grid;
+      grid-template-columns: 2fr 1.3fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .layout-two {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .chip {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--ntt-border);
+      font-size: 0.75rem;
+      background: #f9fafb;
+      color: var(--ntt-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <div class="title-block">
+        <h1>I Torneo Energy de Dardos – NTT DATA Salamanca</h1>
+        <p>Gestor interactivo de normas, fase de grupos y fase final (actualiza resultados en tiempo real).</p>
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Energy Club · Juegos de mesa
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="normas">Normas</button>
+      <button class="tab" data-tab="grupos">Fase de grupos</button>
+      <button class="tab" data-tab="final">Fase final</button>
+    </div>
+
+    <!-- TAB NORMAS -->
+    <div class="tab-content" id="tab-normas">
+      <h2>Normas del torneo</h2>
+
+      <div class="info-block">
+        <div class="chip-group">
+          <span class="chip">Formato: 4 grupos (A–D)</span>
+          <span class="chip">301 straight in / straight out</span>
+          <span class="chip">Mejor de 3 sets</span>
+          <span class="chip">Parejas · tiradas alternas</span>
+          <span class="chip">1 diana · partidos autogestionados</span>
+        </div>
+        <p class="footnote">
+          Esta página NO guarda datos en servidor; los resultados se mantienen mientras la pestaña del navegador esté abierta. 
+          Si se recarga, se pierden.
+        </p>
+      </div>
+
+      <h3>1. Formato general</h3>
+      <ul>
+        <li>Torneo corporativo por parejas en NTT DATA Salamanca, promovido por el Energy Club de juegos de mesa.</li>
+        <li>Los equipos se reparten en 4 grupos (A, B, C, D).</li>
+        <li>De cada grupo se clasifican los <strong>4 primeros</strong> (1º, 2º, 3º, 4º) a la fase final.</li>
+        <li>Fase final con <strong>16 equipos</strong>: octavos, cuartos, semifinales y final.</li>
+      </ul>
+
+      <h3>2. Sistema de juego</h3>
+      <ul>
+        <li>Todas las partidas (grupos y eliminatorias) se juegan a <strong>301 puntos</strong>, modo <strong>straight in / straight out</strong>:
+          <ul>
+            <li>No es necesario entrar ni cerrar en doble.</li>
+            <li>Cualquier segmento de la diana suma, y se puede cerrar con cualquier segmento.</li>
+          </ul>
+        </li>
+        <li>Cada enfrentamiento entre equipos se juega al <strong>mejor de 3 sets</strong>:
+          <ul>
+            <li>Cada set es una partida a 301.</li>
+            <li>El partido termina cuando un equipo gana 2 sets (2–0 o 2–1).</li>
+          </ul>
+        </li>
+        <li>Siempre juegan los <strong>dos jugadores</strong> de cada equipo, en tiradas alternas:
+          <ul>
+            <li>Ejemplo: A1 → B1 → A2 → B2 → A1 → B1 → …</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>3. Puntuación y clasificación en grupos</h3>
+      <ul>
+        <li>Por cada partido:
+          <ul>
+            <li><strong>2 puntos</strong> para el equipo que gana el partido (2–0 o 2–1).</li>
+            <li><strong>1 punto</strong> para el equipo que pierde.</li>
+            <li><strong>0 puntos</strong> si un equipo no se presenta (W.O.).</li>
+          </ul>
+        </li>
+        <li>Desempates en la clasificación del grupo:
+          <ol>
+            <li>Mayor número de puntos.</li>
+            <li>Mejor diferencia de sets (Sets Ganados – Sets Perdidos).</li>
+            <li>Mayor número de sets ganados.</li>
+            <li>Resultado del enfrentamiento directo.</li>
+            <li>Si persiste el empate entre dos equipos: partida extra a 1 set de 301.</li>
+          </ol>
+        </li>
+      </ul>
+
+      <h3>4. Organización de partidos y reporte</h3>
+      <ul>
+        <li>Hay <strong>una única diana</strong> para todo el torneo.</li>
+        <li>Cada partido se acuerda directamente entre los equipos (día y hora).</li>
+        <li>Tras cada partido, publicar resultado en el <strong>canal oficial de Teams</strong>:
+          <ul>
+            <li>Marcador (ej. 2–1, 3–0) y qué equipo gana/pierde.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>5. Fase final (16 equipos)</h3>
+      <ul>
+        <li>Se clasifican los <strong>4 primeros de cada grupo</strong> (16 en total).</li>
+        <li>La fase final se compone de:
+          <ul>
+            <li><strong>Octavos de final</strong> (16 → 8).</li>
+            <li><strong>Cuartos de final</strong> (8 → 4).</li>
+            <li><strong>Semifinales</strong> y <strong>Final</strong>.</li>
+          </ul>
+        </li>
+        <li>Emparejamientos prefijados:
+          <ul>
+            <li>Los <strong>1º</strong> se cruzan con <strong>4º</strong> de otros grupos.</li>
+            <li>Los <strong>2º</strong> se cruzan con <strong>3º</strong> de otros grupos.</li>
+            <li>Se intenta evitar que se crucen equipos del mismo grupo hasta fases avanzadas.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- TAB FASE DE GRUPOS -->
+    <div class="tab-content" id="tab-grupos" style="display:none;">
+      <h2>Fase de grupos</h2>
+      <p class="footnote">
+        Introduce el marcador de sets del partido (ejemplo: <strong>2-1</strong> o <strong>3-0</strong>).  
+        El sistema asume: <strong>2 puntos</strong> para el ganador, <strong>1</strong> para el perdedor, <strong>0</strong> si W.O.  
+        Puedes usar <strong>WOA</strong> (gana equipo A por incomparecencia) o <strong>WOB</strong> (gana equipo B).
+      </p>
+
+      <div id="groups-container"></div>
+    </div>
+
+    <!-- TAB FASE FINAL -->
+    <div class="tab-content" id="tab-final" style="display:none;">
+      <h2>Fase final</h2>
+      <p class="footnote">
+        La clasificación se toma dinámicamente del top 4 de cada grupo.  
+        Cuando modifiques resultados en grupos, al volver aquí se recalcula automáticamente.
+      </p>
+
+      <div id="final-phase"></div>
+    </div>
+  </div>
+
+  <script>
+    /************************************************************
+     * CONFIGURACIÓN DE EQUIPOS (puedes ajustar nombres)
+     ************************************************************/
+    const groups = {
+      A: [
+        "E1 - Ministerio de Ansiedad",
+        "E8 - Null Pointer Exception",
+        "E11 - Punter IA",
+        "E16 - Todo Riesgo, Cero Puntería",
+        "E20 - Pendiente definir¿?",
+        "E21 - Arenques"
+      ],
+      B: [
+        "E2 - Las Dos en Diana",
+        "E5 - Pendiente 1",
+        "E9 - MEDIODARTDUM",
+        "E14 - Talento extremeño",
+        "E18 - Pendiente 2",
+        "E22 - Pendiente 3"
+      ],
+      C: [
+        "E3 - Quartzos de accionistas",
+        "E6 - QA-lladitos pero letales",
+        "E10 - muñones team",
+        "E13 - Ministerio de Ansiedad Portal Caído",
+        "E17 - Los BRANDidos de IT"
+      ],
+      D: [
+        "E4 - Los Dardevs",
+        "E7 - DartGPT",
+        "E12 - Ministerio de Ansiedad casi jubilados",
+        "E15 - Yin Yang",
+        "E19 - Raúl y Jose"
+      ]
+    };
+
+    // Genera todos contra todos en un grupo
+    function generateGroupMatches(groupName, teamList) {
+      const matches = [];
+      let idCounter = 1;
+      for (let i = 0; i < teamList.length; i++) {
+        for (let j = i + 1; j < teamList.length; j++) {
+          matches.push({
+            id: `${groupName}-${idCounter++}`,
+            group: groupName,
+            teamAIndex: i,
+            teamBIndex: j,
+            score: "" // formato "2-1", "3-0", "WOA", "WOB"
+          });
+        }
+      }
+      return matches;
+    }
+
+    const groupMatches = {};
+    Object.entries(groups).forEach(([gName, teamList]) => {
+      groupMatches[gName] = generateGroupMatches(gName, teamList);
+    });
+
+    /************************************************************
+     * PARSEO DE RESULTADOS Y CLASIFICACIÓN
+     ************************************************************/
+    function parseScore(scoreStr) {
+      if (!scoreStr) return null;
+      const s = scoreStr.trim().toUpperCase();
+
+      if (s === "WOA") return { winner: "A", setsA: 2, setsB: 0, wo: true };
+      if (s === "WOB") return { winner: "B", setsA: 0, setsB: 2, wo: true };
+
+      const match = s.match(/^(\d+)\s*-\s*(\d+)$/);
+      if (!match) return null;
+
+      const a = parseInt(match[1], 10);
+      const b = parseInt(match[2], 10);
+      if (isNaN(a) || isNaN(b) || a === b) return null;
+      if (a > 3 || b > 3) return null;
+
+      return {
+        winner: a > b ? "A" : "B",
+        setsA: a,
+        setsB: b,
+        wo: false
+      };
+    }
+
+    function computeGroupStandings(groupName) {
+      const teams = groups[groupName];
+      const matches = groupMatches[groupName];
+
+      const stats = teams.map((name, idx) => ({
+        index: idx,
+        team: name,
+        played: 0,
+        wins: 0,
+        losses: 0,
+        points: 0,
+        setsFor: 0,
+        setsAgainst: 0
+      }));
+
+      matches.forEach(m => {
+        const res = parseScore(m.score);
+        if (!res) return;
+
+        const A = stats[m.teamAIndex];
+        const B = stats[m.teamBIndex];
+
+        A.played++;
+        B.played++;
+        A.setsFor += res.setsA;
+        A.setsAgainst += res.setsB;
+        B.setsFor += res.setsB;
+        B.setsAgainst += res.setsA;
+
+        if (res.winner === "A") {
+          A.wins++;
+          B.losses++;
+          if (res.wo) {
+            A.points += 2;
+          } else {
+            A.points += 2;
+            B.points += 1;
+          }
+        } else {
+          B.wins++;
+          A.losses++;
+          if (res.wo) {
+            B.points += 2;
+          } else {
+            B.points += 2;
+            A.points += 1;
+          }
+        }
+      });
+
+      // Orden: puntos, diferencia de sets, sets a favor, nombre
+      return [...stats].sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        const diffA = a.setsFor - a.setsAgainst;
+        const diffB = b.setsFor - b.setsAgainst;
+        if (diffB !== diffA) return diffB - diffA;
+        if (b.setsFor !== a.setsFor) return b.setsFor - a.setsFor;
+        return a.team.localeCompare(b.team);
+      });
+    }
+
+    /************************************************************
+     * RENDER FASE DE GRUPOS
+     ************************************************************/
+    function renderGroups() {
+      const container = document.getElementById("groups-container");
+      container.innerHTML = "";
+
+      Object.entries(groups).forEach(([gName, teamList]) => {
+        const block = document.createElement("div");
+        block.style.marginBottom = "26px";
+
+        const title = document.createElement("div");
+        title.className = "subsection-title";
+        title.innerHTML = `Grupo ${gName}<span class="pill">${teamList.length} equipos</span>`;
+        block.appendChild(title);
+
+        const layout = document.createElement("div");
+        layout.className = "layout-two";
+
+        // Tabla de partidos
+        const matchesTable = document.createElement("table");
+        const thead = document.createElement("thead");
+        thead.innerHTML = `
+          <tr>
+            <th>Partido</th>
+            <th>Equipo A</th>
+            <th>Equipo B</th>
+            <th>Marcador (A-B)</th>
+          </tr>
+        `;
+        matchesTable.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        groupMatches[gName].forEach((m, idx) => {
+          const row = document.createElement("tr");
+          const teamAName = teamList[m.teamAIndex];
+          const teamBName = teamList[m.teamBIndex];
+
+          row.innerHTML = `
+            <td>${idx + 1}</td>
+            <td>${teamAName}</td>
+            <td>${teamBName}</td>
+            <td><input type="text" data-match-id="${m.id}" placeholder="2-1 / 3-0 / WOA / WOB" value="${m.score || ""}" /></td>
+          `;
+          tbody.appendChild(row);
+        });
+        matchesTable.appendChild(tbody);
+        layout.appendChild(matchesTable);
+
+        // Clasificación
+        const standingsBlock = document.createElement("div");
+        const standingsTitle = document.createElement("div");
+        standingsTitle.textContent = "Clasificación (dinámica)";
+        standingsTitle.style.fontSize = "0.9rem";
+        standingsTitle.style.fontWeight = "600";
+        standingsTitle.style.marginBottom = "4px";
+        standingsBlock.appendChild(standingsTitle);
+
+        const standingsTable = document.createElement("table");
+        standingsTable.innerHTML = `
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Equipo</th>
+              <th>PJ</th>
+              <th>PG</th>
+              <th>PP</th>
+              <th>Sets +</th>
+              <th>Sets -</th>
+              <th>Dif</th>
+              <th>Puntos</th>
+            </tr>
+          </thead>
+          <tbody id="standings-${gName}"></tbody>
+        `;
+        standingsBlock.appendChild(standingsTable);
+
+        layout.appendChild(standingsBlock);
+        block.appendChild(layout);
+        container.appendChild(block);
+      });
+
+      // Listeners en los inputs de partidos
+      container.querySelectorAll("input[data-match-id]").forEach(input => {
+        input.addEventListener("input", () => {
+          const id = input.getAttribute("data-match-id");
+          Object.entries(groupMatches).forEach(([gName, matches]) => {
+            const m = matches.find(mm => mm.id === id);
+            if (m) m.score = input.value;
+          });
+          updateAllStandingsAndFinal();
+        });
+      });
+
+      updateAllStandingsAndFinal();
+    }
+
+    function renderStandingsForGroup(groupName) {
+      const standingsBody = document.getElementById(`standings-${groupName}`);
+      if (!standingsBody) return;
+
+      const standings = computeGroupStandings(groupName);
+      standingsBody.innerHTML = "";
+
+      standings.forEach((s, idx) => {
+        const diff = s.setsFor - s.setsAgainst;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>${s.team}</td>
+          <td>${s.played}</td>
+          <td>${s.wins}</td>
+          <td>${s.losses}</td>
+          <td>${s.setsFor}</td>
+          <td>${s.setsAgainst}</td>
+          <td>${diff}</td>
+          <td>${s.points}</td>
+        `;
+        standingsBody.appendChild(tr);
+      });
+    }
+
+    function updateAllStandingsAndFinal() {
+      Object.keys(groups).forEach(gName => renderStandingsForGroup(gName));
+      renderFinalPhase();
+    }
+
+    /************************************************************
+     * FASE FINAL: OCTAVOS, CUARTOS, SEMIS, FINAL
+     ************************************************************/
+    function getTop4ByGroup() {
+      const out = {};
+      Object.keys(groups).forEach(gName => {
+        const standings = computeGroupStandings(gName);
+        out[gName] = standings.slice(0, 4); // top 4
+      });
+      return out;
+    }
+
+    function renderFinalPhase() {
+      const container = document.getElementById("final-phase");
+      container.innerHTML = "";
+
+      const top4 = getTop4ByGroup();
+
+      function getTeamFrom(group, posZeroBased) {
+        const g = top4[group];
+        if (!g || !g[posZeroBased]) return "(por definir)";
+        return g[posZeroBased].team;
+      }
+
+      const octavos = [
+        { code: "O1", desc: "1º A vs 4º C", team1: getTeamFrom("A", 0), team2: getTeamFrom("C", 3) },
+        { code: "O2", desc: "1º B vs 4º D", team1: getTeamFrom("B", 0), team2: getTeamFrom("D", 3) },
+        { code: "O3", desc: "1º C vs 4º A", team1: getTeamFrom("C", 0), team2: getTeamFrom("A", 3) },
+        { code: "O4", desc: "1º D vs 4º B", team1: getTeamFrom("D", 0), team2: getTeamFrom("B", 3) },
+        { code: "O5", desc: "2º A vs 3º D", team1: getTeamFrom("A", 1), team2: getTeamFrom("D", 2) },
+        { code: "O6", desc: "2º B vs 3º C", team1: getTeamFrom("B", 1), team2: getTeamFrom("C", 2) },
+        { code: "O7", desc: "2º C vs 3º A", team1: getTeamFrom("C", 1), team2: getTeamFrom("A", 2) },
+        { code: "O8", desc: "2º D vs 3º B", team1: getTeamFrom("D", 1), team2: getTeamFrom("B", 2) }
+      ];
+
+      if (!window.finalResults) {
+        window.finalResults = { octavos: {}, cuartos: {}, semis: {}, final: {} };
+      }
+
+      const info = document.createElement("div");
+      info.className = "info-block";
+      info.innerHTML = `
+        <p><strong>Esquema de cruces (prefijado):</strong></p>
+        <ul>
+          <li>Octavos (16 → 8):
+            <ul>
+              <li>O1: 1º A vs 4º C</li>
+              <li>O2: 1º B vs 4º D</li>
+              <li>O3: 1º C vs 4º A</li>
+              <li>O4: 1º D vs 4º B</li>
+              <li>O5: 2º A vs 3º D</li>
+              <li>O6: 2º B vs 3º C</li>
+              <li>O7: 2º C vs 3º A</li>
+              <li>O8: 2º D vs 3º B</li>
+            </ul>
+          </li>
+          <li>Cuartos (8 → 4):
+            <ul>
+              <li>QF1: Ganador O1 vs Ganador O6</li>
+              <li>QF2: Ganador O2 vs Ganador O7</li>
+              <li>QF3: Ganador O3 vs Ganador O8</li>
+              <li>QF4: Ganador O4 vs Ganador O5</li>
+            </ul>
+          </li>
+          <li>Semifinales:
+            <ul>
+              <li>SF1: Ganador QF1 vs Ganador QF2</li>
+              <li>SF2: Ganador QF3 vs Ganador QF4</li>
+            </ul>
+          </li>
+          <li>Final:
+            <ul>
+              <li>Ganador SF1 vs Ganador SF2</li>
+            </ul>
+          </li>
+        </ul>
+      `;
+      container.appendChild(info);
+
+      /* --- OCTAVOS --- */
+      const octTitle = document.createElement("div");
+      octTitle.className = "subsection-title";
+      octTitle.textContent = "Octavos de final (16 → 8)";
+      container.appendChild(octTitle);
+
+      const octTable = document.createElement("table");
+      octTable.innerHTML = `
+        <thead>
+          <tr>
+            <th>Partido</th>
+            <th>Equipo 1</th>
+            <th>Equipo 2</th>
+            <th>Marcador</th>
+            <th>Ganador</th>
+          </tr>
+        </thead>
+        <tbody id="octavos-body"></tbody>
+      `;
+      container.appendChild(octTable);
+
+      const octBody = octTable.querySelector("tbody");
+      octBody.innerHTML = "";
+
+      // Guardar info base de equipos de octavos
+      octavos.forEach(o => {
+        if (!window.finalResults.octavos[o.code]) {
+          window.finalResults.octavos[o.code] = { team1: o.team1, team2: o.team2, score: "" };
+        } else {
+          window.finalResults.octavos[o.code].team1 = o.team1;
+          window.finalResults.octavos[o.code].team2 = o.team2;
+        }
+      });
+
+      function getWinnerFrom(roundKey, code, defaultLabel) {
+        const entry = window.finalResults[roundKey]?.[code];
+        if (!entry || !entry.score) return defaultLabel;
+        const parsed = parseScore(entry.score);
+        if (!parsed) return defaultLabel;
+        if (parsed.winner === "A") return entry.team1 + (parsed.wo ? " (WO)" : "");
+        return entry.team2 + (parsed.wo ? " (WO)" : "");
+      }
+
+      octavos.forEach(o => {
+        const tr = document.createElement("tr");
+        const storedScore = window.finalResults.octavos[o.code]?.score || "";
+        const parsed = parseScore(storedScore);
+        let winnerName = "";
+        if (parsed) {
+          if (parsed.winner === "A") winnerName = o.team1 + (parsed.wo ? " (WO)" : "");
+          else winnerName = o.team2 + (parsed.wo ? " (WO)" : "");
+        }
+
+        tr.innerHTML = `
+          <td>${o.code}<br/><span style="font-size:0.75rem;color:#6b7280">${o.desc}</span></td>
+          <td>${o.team1}</td>
+          <td>${o.team2}</td>
+          <td><input type="text" data-final-round="octavos" data-match-code="${o.code}" value="${storedScore}" placeholder="2-1 / 3-0 / WOA / WOB" /></td>
+          <td>${winnerName || "-"}</td>
+        `;
+        octBody.appendChild(tr);
+      });
+
+      /* --- CUARTOS --- */
+      const qfTitle = document.createElement("div");
+      qfTitle.className = "subsection-title";
+      qfTitle.textContent = "Cuartos de final (8 → 4)";
+      container.appendChild(qfTitle);
+
+      const qfTable = document.createElement("table");
+      qfTable.innerHTML = `
+        <thead>
+          <tr>
+            <th>Partido</th>
+            <th>Equipo 1</th>
+            <th>Equipo 2</th>
+            <th>Marcador</th>
+            <th>Ganador</th>
+          </tr>
+        </thead>
+        <tbody id="qf-body"></tbody>
+      `;
+      container.appendChild(qfTable);
+
+      const qfBody = qfTable.querySelector("tbody");
+      qfBody.innerHTML = "";
+
+      const qfDefs = [
+        { code: "QF1", from1: { round: "octavos", code: "O1" }, from2: { round: "octavos", code: "O6" } },
+        { code: "QF2", from1: { round: "octavos", code: "O2" }, from2: { round: "octavos", code: "O7" } },
+        { code: "QF3", from1: { round: "octavos", code: "O3" }, from2: { round: "octavos", code: "O8" } },
+        { code: "QF4", from1: { round: "octavos", code: "O4" }, from2: { round: "octavos", code: "O5" } }
+      ];
+
+      qfDefs.forEach(q => {
+        const t1 = getWinnerFrom(q.from1.round, q.from1.code, `Ganador ${q.from1.code}`);
+        const t2 = getWinnerFrom(q.from2.round, q.from2.code, `Ganador ${q.from2.code}`);
+        const stored = window.finalResults.cuartos[q.code]?.score || "";
+        const parsed = parseScore(stored);
+        let winnerName = "";
+        if (parsed) {
+          if (parsed.winner === "A") winnerName = t1 + (parsed.wo ? " (WO)" : "");
+          else winnerName = t2 + (parsed.wo ? " (WO)" : "");
+        }
+
+        if (!window.finalResults.cuartos[q.code]) {
+          window.finalResults.cuartos[q.code] = { team1: t1, team2: t2, score: stored };
+        } else {
+          window.finalResults.cuartos[q.code].team1 = t1;
+          window.finalResults.cuartos[q.code].team2 = t2;
+        }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${q.code}</td>
+          <td>${t1}</td>
+          <td>${t2}</td>
+          <td><input type="text" data-final-round="cuartos" data-match-code="${q.code}" value="${stored}" placeholder="2-1 / 3-0 / WOA / WOB" /></td>
+          <td>${winnerName || "-"}</td>
+        `;
+        qfBody.appendChild(tr);
+      });
+
+      /* --- SEMIFINALES --- */
+      const sfTitle = document.createElement("div");
+      sfTitle.className = "subsection-title";
+      sfTitle.textContent = "Semifinales (4 → 2)";
+      container.appendChild(sfTitle);
+
+      const sfTable = document.createElement("table");
+      sfTable.innerHTML = `
+        <thead>
+          <tr>
+            <th>Partido</th>
+            <th>Equipo 1</th>
+            <th>Equipo 2</th>
+            <th>Marcador</th>
+            <th>Ganador</th>
+          </tr>
+        </thead>
+        <tbody id="sf-body"></tbody>
+      `;
+      container.appendChild(sfTable);
+
+      const sfBody = sfTable.querySelector("tbody");
+      sfBody.innerHTML = "";
+
+      const sfDefs = [
+        { code: "SF1", from1: { round: "cuartos", code: "QF1" }, from2: { round: "cuartos", code: "QF2" } },
+        { code: "SF2", from1: { round: "cuartos", code: "QF3" }, from2: { round: "cuartos", code: "QF4" } }
+      ];
+
+      sfDefs.forEach(s => {
+        const t1 = getWinnerFrom(s.from1.round, s.from1.code, `Ganador ${s.from1.code}`);
+        const t2 = getWinnerFrom(s.from2.round, s.from2.code, `Ganador ${s.from2.code}`);
+        const stored = window.finalResults.semis[s.code]?.score || "";
+        const parsed = parseScore(stored);
+        let winnerName = "";
+        if (parsed) {
+          if (parsed.winner === "A") winnerName = t1 + (parsed.wo ? " (WO)" : "");
+          else winnerName = t2 + (parsed.wo ? " (WO)" : "");
+        }
+
+        if (!window.finalResults.semis[s.code]) {
+          window.finalResults.semis[s.code] = { team1: t1, team2: t2, score: stored };
+        } else {
+          window.finalResults.semis[s.code].team1 = t1;
+          window.finalResults.semis[s.code].team2 = t2;
+        }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${s.code}</td>
+          <td>${t1}</td>
+          <td>${t2}</td>
+          <td><input type="text" data-final-round="semis" data-match-code="${s.code}" value="${stored}" placeholder="2-1 / 3-0 / WOA / WOB" /></td>
+          <td>${winnerName || "-"}</td>
+        `;
+        sfBody.appendChild(tr);
+      });
+
+      /* --- FINAL --- */
+      const finalTitle = document.createElement("div");
+      finalTitle.className = "subsection-title";
+      finalTitle.textContent = "Final (2 → 1 campeón)";
+      container.appendChild(finalTitle);
+
+      const finalTable = document.createElement("table");
+      finalTable.innerHTML = `
+        <thead>
+          <tr>
+            <th>Partido</th>
+            <th>Equipo 1</th>
+            <th>Equipo 2</th>
+            <th>Marcador</th>
+            <th>Campeón</th>
+          </tr>
+        </thead>
+        <tbody id="final-body"></tbody>
+      `;
+      container.appendChild(finalTable);
+
+      const finalBody = finalTable.querySelector("tbody");
+      finalBody.innerHTML = "";
+
+      const fTeam1 = getWinnerFrom("semis", "SF1", "Ganador SF1");
+      const fTeam2 = getWinnerFrom("semis", "SF2", "Ganador SF2");
+      const storedFinal = window.finalResults.final["F1"]?.score || "";
+      const parsedFinal = parseScore(storedFinal);
+      let champ = "";
+      if (parsedFinal) {
+        if (parsedFinal.winner === "A") champ = fTeam1 + (parsedFinal.wo ? " (WO)" : "");
+        else champ = fTeam2 + (parsedFinal.wo ? " (WO)" : "");
+      }
+
+      if (!window.finalResults.final["F1"]) {
+        window.finalResults.final["F1"] = { team1: fTeam1, team2: fTeam2, score: storedFinal };
+      } else {
+        window.finalResults.final["F1"].team1 = fTeam1;
+        window.finalResults.final["F1"].team2 = fTeam2;
+      }
+
+      const ftr = document.createElement("tr");
+      ftr.innerHTML = `
+        <td>Final</td>
+        <td>${fTeam1}</td>
+        <td>${fTeam2}</td>
+        <td><input type="text" data-final-round="final" data-match-code="F1" value="${storedFinal}" placeholder="2-1 / 3-0 / WOA / WOB" /></td>
+        <td>${champ || "-"}</td>
+      `;
+      finalBody.appendChild(ftr);
+
+      // Listeners de inputs de fase final
+      container.querySelectorAll("input[data-final-round]").forEach(inp => {
+        inp.addEventListener("input", () => {
+          const round = inp.getAttribute("data-final-round");
+          const code = inp.getAttribute("data-match-code");
+          const val = inp.value;
+          if (!window.finalResults[round][code]) {
+            window.finalResults[round][code] = { team1: "", team2: "", score: val };
+          } else {
+            window.finalResults[round][code].score = val;
+          }
+          renderFinalPhase();
+        });
+      });
+    }
+
+    /************************************************************
+     * TABS
+     ************************************************************/
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+
+        const target = tab.getAttribute("data-tab");
+        document.getElementById("tab-normas").style.display = target === "normas" ? "block" : "none";
+        document.getElementById("tab-grupos").style.display = target === "grupos" ? "block" : "none";
+        document.getElementById("tab-final").style.display = target === "final" ? "block" : "none";
+      });
+    });
+
+    // Inicializar
+    renderGroups();
+  </script>
+</body>
+</html>
